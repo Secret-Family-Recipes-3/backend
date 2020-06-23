@@ -4,7 +4,8 @@ const cors = require('cors');
 
 const usersRouter = require('../users/usersRouter');
 const authRouter = require('../auth/authRouter');
-const { authenticate } = require('./middleware');
+const recipesRouter = require('../recipes/recipesRouter')
+const { authenticate } = require('../middleware/middleware');
 
 const server = express();
 

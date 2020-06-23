@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 
-const { generateToken } = require('../middleware/middleware');
+const { generateToken, requiredProperty } = require('../middleware/middleware');
 const { rounds } = require('../api/secrets.js');
 const Users = require('../users/usersModels');
 

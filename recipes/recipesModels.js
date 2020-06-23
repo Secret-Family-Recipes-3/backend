@@ -5,8 +5,8 @@ module.exports = {
     find,
     findBy,
     findById,
-    updateUser,
-    deleteUser
+    updateRecipe,
+    deleteRecipe
 };
 
 function find() {
@@ -26,10 +26,10 @@ function findById(id) {
     return db('recipes').where({ id }).first();
 };
 
-function updateUser(id, newData) {
+function updateRecipe(id, newData) {
     return findById( id ).update(newData);
 };
 
-function deleteUser(id) {
+function deleteRecipe(id) {
     return findById( id ).del();
 }
