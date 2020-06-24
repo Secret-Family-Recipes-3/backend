@@ -17,7 +17,7 @@ exports.up = function(knex) {
             .notNullable();
       })
 
-      .createTable('recipes', tbl => {
+      .createTable('recipes', recipes => {
        recipes.increments();
        recipes.date('date_created')
           .notNullable()
