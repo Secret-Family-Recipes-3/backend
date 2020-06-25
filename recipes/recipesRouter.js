@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const Users = require('./recipesModels');
+const Recipes = require('./recipesModels');
 
 // === GETS === GETS === GETS === GETS === GETS === GETS === GETS
 router.get('/', (req, res) => {
-    Users.find()
+    Recipes.find()
     .then(recipes => {
         res.status(200).json({recipes})
     })
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    Users.findById(id)
+    Recipes.findById(id)
     .then(recipe => {
         res.status(200).json({recipe})
     })
@@ -30,13 +30,28 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// === POSTS === POSTS === POSTS === POSTS === POSTS === POSTS ===
+router.post('/', (req, res) => {
+    const newRecipe = req.body;
+    Recipes.addRecipe(newRecipe)
+      .then(saved => {
+          res.status(201).json({ 
+            message: 'Recipe Saved',
+            data: saved,
+          });
+      })
+      .catch(error => {
+        res.status(500).json({ message: 'Server cannot add recipe', error });
+      });
+});
+
 
 // === PUTS === PUTS === PUTS === PUTS === PUTS === PUTS === PUTS
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const newData = req.body;
     console.log(id);
-    Users.updateRecipe(id, newData)
+    Recipes.updateRecipe(id, newData)
     .then(recipe => {
         res.status(200).json({recipe})
     })
@@ -52,7 +67,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req,res) => {
     const { id } = req.params;
 
-    Users.deleteRecipe(id)
+    Recipes.deleteRecipe(id)
     .then(deleted => {
       if (deleted) {
         res.json({ 

@@ -1,7 +1,7 @@
 const db = require('../database/dbConfig');
 
 module.exports = {
-    add,
+    addRecipe,
     find,
     findBy,
     findById,
@@ -17,7 +17,7 @@ function findBy(filter) {
     return db('recipes').where(filter);
 };
 
-async function add(recipe) {
+async function addRecipe(recipe) {
     const [id] = await db('recipes').insert(recipe, 'id');
     return findById(id);
 };
