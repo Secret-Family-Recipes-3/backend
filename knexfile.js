@@ -1,12 +1,16 @@
-// const pgConnection = process.env.DATABASE_URL || "postgresql://postgres@localhost/sfr";
+const pgConnection = process.env.URI;
+const localDB = "postgresql://postgres@localhost/sfr";
 require('dotenv').config();
 
 module.exports = {
 
   development: {
-    client: 'sqlite3',
-    connection: { 
-      filename: './database/db.db3' 
+    client: "pg",
+    connection: {
+      localDB,
+      database: 'sfr',
+      user:     'postgres',
+      password: 'PGadmin23'
     },
     useNullAsDefault: true,
     migrations: {
@@ -17,89 +21,77 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: 'postgresql',
+  testing: {
+    client: "sqlite3",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      filename: './database/db.db3'
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
+    },
+  },
+
+  staging: {
+    client: "pg",
+    connection: pgConnection,
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
+    },
   },
 
   production: {
-    client: 'postgresql',
+    client: "pg",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      pgConnection,
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
+    },
+  },
 
-  // development: {
-  //   client: "sqlite3",
+  comments: {
+      // staging: {
+  //   client: 'postgresql',
   //   connection: {
-  //     filename: './database/db.db3'
+  //     database: 'my_db',
+  //     user:     'username',
+  //     password: 'password'
   //   },
-  //   useNullAsDefault: true,
+  //   pool: {
+  //     min: 2,
+  //     max: 10
+  //   },
   //   migrations: {
-  //     directory: "./database/migrations",
-  //   },
-  //   seeds: {
-  //     directory: "./database/seeds",
-  //   },
-  // },
-
-  // testing: {
-  //   client: "sqlite3",
-  //   connection: {
-  //     filename: './database/db.db3'
-  //   },
-  //   // client: "pg",
-  //   // connection: pgConnection,
-  //   useNullAsDefault: true,
-  //   migrations: {
-  //     directory: "./database/migrations",
-  //   },
-  //   seeds: {
-  //     directory: "./database/seeds",
-  //   },
-  // },
-
-  // staging: {
-  //   client: "pg",
-  //   connection: pgConnection,
-  //   useNullAsDefault: true,
-  //   migrations: {
-  //     directory: "./database/migrations",
-  //   },
-  //   seeds: {
-  //     directory: "./database/seeds",
-  //   },
+  //     tableName: 'knex_migrations'
+  //   }
   // },
 
   // production: {
-  //   client: "pg",
-  //   connection: pgConnection,
-  //   useNullAsDefault: true,
+  //   client: 'postgresql',
+  //   connection: {
+  //     database: 'my_db',
+  //     user:     'username',
+  //     password: 'password'
+  //   },
+  //   pool: {
+  //     min: 2,
+  //     max: 10
+  //   },
   //   migrations: {
-  //     directory: "./database/migrations",
-  //   },
-  //   seeds: {
-  //     directory: "./database/seeds",
-  //   },
+  //     tableName: 'knex_migrations'
+  //   }
   // }
+  },
 };
