@@ -35,27 +35,9 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: "pg",
-    connection: pgConnection,
-    useNullAsDefault: true,
-    migrations: {
-      directory: "./database/migrations",
-    },
-    seeds: {
-      directory: "./database/seeds",
-    },
-    pool: {
-          min: 2,
-          max: 10
-        }
-  },
-
   production: {
     client: "pg",
-    connection: {
-      pgConnection,
-    },
+    connection: pgConnection,
     useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations",
