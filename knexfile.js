@@ -1,5 +1,5 @@
-const pgConnection = process.env.URI;
-const localDB = "postgresql://postgres@localhost/sfr";
+const pgConnection = process.env.DATABASE_URL;
+const localDB = process.env.LOCAL_DATABASE_URL;
 require('dotenv').config();
 
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
   production: {
     client: "pg",
     connection: {
-      pgConnection,
+      localDB,
     },
     useNullAsDefault: true,
     migrations: {
