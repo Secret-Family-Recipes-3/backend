@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 
 const { generateToken } = require('../middleware/middleware');
+const { rounds } = require('../api/secrets');
 const Users = require('../users/usersModels');
 
 // REGISTER === REGISTER === REGISTER === REGISTER === REGISTER ===
@@ -11,7 +12,7 @@ router.get('/register', (req, res) => {
   
   router.post('/register', (req, res) => {
     let user = req.body;
-    const hash = bcrypt.hashSync(user.password, 12);
+    const hash = bcrypt.hashSync(user.password, rounds);
     user.password = hash;
 
     Users.add(user)
