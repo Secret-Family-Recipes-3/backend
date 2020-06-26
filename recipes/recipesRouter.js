@@ -6,7 +6,10 @@ const Recipes = require('./recipesModels');
 router.get('/', (req, res) => {
     Recipes.find()
     .then(recipes => {
-        res.status(200).json({recipes})
+        res.status(200).json({
+            message: 'Recipes!!!',
+            recipes: recipes
+        })
     })
     .catch((error) => {
         res.status(500).json({ 

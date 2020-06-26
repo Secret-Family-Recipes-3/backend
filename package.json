@@ -20,7 +20,8 @@
   "homepage": "https://github.com/Secret-Family-Recipes-3/backend#readme",
   "devDependencies": {
     "jest": "^26.0.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
