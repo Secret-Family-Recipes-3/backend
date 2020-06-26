@@ -5,7 +5,7 @@ const { generateToken } = require('../middleware/middleware');
 const { rounds } = require('../api/secrets');
 const Users = require('../users/usersModels');
 
-// REGISTER === REGISTER === REGISTER === REGISTER === REGISTER ===
+// === REGISTER === REGISTER === REGISTER === REGISTER === REGISTER === REGISTER === REGISTER === 
 router.get('/register', (req, res) => {
     res.json({ api: "'.get /register' brings you here. use a '.post' to register a new user" });
   });
@@ -16,13 +16,13 @@ router.get('/register', (req, res) => {
     user.password = hash;
 
     Users.add(user)
-      .then(saved => {
+      .then(newUser => {
         // res.status(201).json(saved);
-        if (saved) {
+        if (newUser) {
           const token = generateToken(user);
           res.status(201).json({ 
             message: `Successful Registration, Welcome ${user.username}!`,
-            data: saved,
+            newUser: newUser,
             token: token, 
           });
         } else {
@@ -37,7 +37,7 @@ router.get('/register', (req, res) => {
 });
   
   
-  // === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN ===
+  // === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === LOGIN === 
   router.get('/login', (req, res) => {
     res.json({ api: "'.get /login' brings you here. use a '.post' to login a user" });
   });
